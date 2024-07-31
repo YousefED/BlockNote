@@ -555,6 +555,33 @@
         }
       },
       {
+        "projectSlug": "equation",
+        "fullSlug": "ui-components/equation",
+        "pathFromRoot": "examples/03-ui-components/13-equation",
+        "config": {
+          "playground": true,
+          "docs": false,
+          "author": "matthewlipski",
+          "tags": [
+            "Equation",
+            "Inline Equation",
+            "Custom Schemas",
+            "Latex",
+            "Slash Menu"
+          ],
+          "dependencies": {
+            "katex": "^0.16.11",
+            "@types/katex": "^0.16.7",
+            "react-icons": "^5.2.1"
+          } as any
+        },
+        "title": "Inline Equation",
+        "group": {
+          "pathFromRoot": "examples/03-ui-components",
+          "slug": "ui-components"
+        }
+      },
+      {
         "projectSlug": "link-toolbar-buttons",
         "fullSlug": "ui-components/link-toolbar-buttons",
         "pathFromRoot": "examples/03-ui-components/link-toolbar-buttons",
