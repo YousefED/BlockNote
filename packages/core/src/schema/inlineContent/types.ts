@@ -1,4 +1,6 @@
 import { Node } from "@tiptap/core";
+import { DOMOutputSpec } from "@tiptap/pm/model";
+import { Node as ProseMirrorNode } from "prosemirror-model";
 import { PropSchema, Props } from "../propTypes";
 import { StyleSchema, Styles } from "../styles/types";
 
@@ -6,6 +8,10 @@ export type CustomInlineContentConfig = {
   type: string;
   content: "styled" | "none"; // | "plain"
   readonly propSchema: PropSchema;
+  renderHTML?: (props: {
+    node: ProseMirrorNode;
+    HTMLAttributes: Record<string, any>;
+  }) => DOMOutputSpec;
   // content: "inline" | "none" | "table";
 };
 // InlineContentConfig contains the "schema" info about an InlineContent type
