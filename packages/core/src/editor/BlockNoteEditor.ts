@@ -207,6 +207,7 @@ export class BlockNoteEditor<
   SSchema extends StyleSchema = DefaultStyleSchema
 > {
   private readonly _pmSchema: Schema;
+  private activeTransaction: Transaction | undefined = undefined;
 
   /**
    * Boolean indicating whether the editor is in headless mode.
@@ -484,8 +485,28 @@ export class BlockNoteEditor<
     }
   }
 
-  dispatch(tr: Transaction) {
-    this._tiptapEditor.dispatch(tr);
+  /**
+   * Dispatch a transaction, but only if not in a "blocknote transact".
+   */
+  public dispatch(tr: Transaction) {
+    if (!this.activeTransaction) {
+      this._tiptapEditor.dispatch(tr);
+    }
+  }
+
+  /**
+   * Execute a function within a "blocknote transaction".
+   * All changes to the editor within the transaction will be grouped together, so that
+   * we can dispatch them as a single operation (thus creating only a single undo step)
+   */
+  public transact(func: () => void) {
+    this.activeTransaction = this._tiptapEditor.state.tr;
+    try {
+      func();
+      this._tiptapEditor.dispatch(this.activeTransaction);
+    } finally {
+      this.activeTransaction = undefined;
+    }
   }
 
   /**
@@ -795,7 +816,7 @@ export class BlockNoteEditor<
     blockToUpdate: BlockIdentifier,
     update: PartialBlock<BSchema, ISchema, SSchema>
   ) {
-    return updateBlock(this, blockToUpdate, update);
+    return updateBlock(this, blockToUpdate, update, this.activeTransaction);
   }
 
   /**
