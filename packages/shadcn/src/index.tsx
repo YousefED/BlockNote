@@ -51,7 +51,7 @@ import { GridSuggestionMenuItem } from "./suggestionMenu/gridSuggestionMenu/Grid
 import { GridSuggestionMenuLoader } from "./suggestionMenu/gridSuggestionMenu/GridSuggestionMenuLoader.js";
 
 export const components: Components = {
-  FormattingToolbar: {
+  Toolbar: {
     Root: Toolbar,
     Button: ToolbarButton,
     Select: ToolbarSelect,
@@ -62,10 +62,6 @@ export const components: Components = {
     FileInput: PanelFileInput,
     TabPanel: PanelTab,
     TextInput: PanelTextInput,
-  },
-  LinkToolbar: {
-    Root: Toolbar,
-    Button: ToolbarButton,
   },
   SideMenu: {
     Root: SideMenu,
